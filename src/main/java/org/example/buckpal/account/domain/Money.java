@@ -55,4 +55,8 @@ public class Money {
     public boolean isGreaterThan(Money money){
         return this.amount.compareTo(money.amount) >= 1;
     }
+
+    public BigInteger getAmount() {
+        return amount;
+    }
 }

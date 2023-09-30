@@ -1,5 +1,7 @@
 package org.example.buckpal.account.domain;
 
+import lombok.Builder;
+
 import java.time.LocalDateTime;
 
 public class Activity {
@@ -25,6 +27,7 @@ public class Activity {
 
     private final Money money;
 
+    @Builder
     public Activity(AccountId ownerAccountId, AccountId sourceAccountId, AccountId targetAccountId, LocalDateTime timestamp, Money money) {
         this.id = null;
         this.ownerAccountId = ownerAccountId;
@@ -50,7 +53,11 @@ public class Activity {
         return sourceAccountId;
     }
 
-    public boolean isEqualsAccountId(AccountId accountId) {
-        return this.id.equals(accountId);
+    public boolean isEqualsSourceAccount(AccountId accountId) {
+        return this.sourceAccountId.equals(accountId);
+    }
+
+    public boolean isEqualsTargetAccount(AccountId accountId) {
+        return this.targetAccountId.equals(accountId);
     }
 }

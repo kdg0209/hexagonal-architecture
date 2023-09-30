@@ -12,12 +12,12 @@ public class ActivityWindow {
 
     public Money calculateBalance(AccountId accountId) {
         Money depositBalance = this.activities.stream()
-                .filter(a -> a.isEqualsAccountId(accountId))
+                .filter(a -> a.isEqualsTargetAccount(accountId))
                 .map(Activity::getMoney)
                 .reduce(Money.ZERO, Money::add);
 
         Money withdrawalBalance = this.activities.stream()
-                .filter(a -> a.isEqualsAccountId(accountId))
+                .filter(a -> a.isEqualsSourceAccount(accountId))
                 .map(Activity::getMoney)
                 .reduce(Money.ZERO, Money::add);
 
