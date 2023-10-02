@@ -1,7 +1,11 @@
 package org.example.buckpal.account.domain;
 
-import java.time.LocalDateTime;
+import lombok.Getter;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Getter
 public class Account {
 
     private final AccountId id;
@@ -14,6 +18,10 @@ public class Account {
         this.activityWindow = activityWindow;
     }
 
+    public static Account withId(AccountId accountId, Money baselineBalance, ActivityWindow activityWindow) {
+        return new Account(accountId, baselineBalance, activityWindow);
+    }
+
     public Money calculateBalance() {
         return Money.add(this.baselineBalance, this.activityWindow.calculateBalance(this.id));
     }
@@ -23,29 +31,33 @@ public class Account {
             return false;
         }
 
-        Activity activity = new Activity(
-                this.id,
-                this.id,
-                tartgetAccountId,
-                LocalDateTime.now(),
-                money
-        );
+        Activity activity = Activity.builder()
+                .ownerAccountId(this.id)
+                .sourceAccountId(this.id)
+                .targetAccountId(tartgetAccountId)
+                .timestamp(LocalDateTime.now())
+                .money(money)
+                .build();
 
         this.activityWindow.addActivity(activity);
         return true;
     }
 
     public boolean deposit(Money money, AccountId sourceAccountId) {
-        Activity activity = new Activity(
-                this.id,
-                sourceAccountId,
-                this.id,
-                LocalDateTime.now(),
-                money
-        );
+        Activity activity = Activity.builder()
+                .ownerAccountId(this.id)
+                .sourceAccountId(sourceAccountId)
+                .targetAccountId(this.id)
+                .timestamp(LocalDateTime.now())
+                .money(money)
+                .build();
 
         this.activityWindow.addActivity(activity);
         return true;
+    }
+
+    public List<Activity> findAllActivities() {
+        return this.activityWindow.getActivities();
     }
 
     private boolean mayWithdraw(Money money) {

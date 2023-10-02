@@ -1,7 +1,10 @@
 package org.example.buckpal.account.domain;
 
+import lombok.Getter;
+
 import java.util.List;
 
+@Getter
 public class ActivityWindow {
 
     private List<Activity> activities;
