@@ -3,8 +3,10 @@ package org.example.buckpal.account.application.service;
 import lombok.RequiredArgsConstructor;
 import org.example.buckpal.account.application.port.in.SendMoneyCommand;
 import org.example.buckpal.account.application.port.in.SendMoneyUseCase;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @Transactional
 @RequiredArgsConstructor
 public class SendMoneyService implements SendMoneyUseCase {

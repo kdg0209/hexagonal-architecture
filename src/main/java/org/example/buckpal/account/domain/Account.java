@@ -1,5 +1,6 @@
 package org.example.buckpal.account.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ public class Account {
     private final Money baselineBalance;
     private final ActivityWindow activityWindow;
 
+    @Builder
     private Account(AccountId id, Money baselineBalance, ActivityWindow activityWindow) {
         this.id = id;
         this.baselineBalance = baselineBalance;
