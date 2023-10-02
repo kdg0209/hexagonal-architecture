@@ -3,10 +3,12 @@ package org.example.buckpal.account.adapter.out.mapper;
 import org.example.buckpal.account.adapter.out.persistence.AccountJPAEntity;
 import org.example.buckpal.account.adapter.out.persistence.ActivityJPAEntity;
 import org.example.buckpal.account.domain.*;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class AccountMapper {
 
     public Account mapToDomainEntity(AccountJPAEntity account, List<ActivityJPAEntity> activities, Long withdrawalBalance, Long depositBalance) {
