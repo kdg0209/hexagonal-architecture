@@ -1,9 +1,11 @@
 package org.example.buckpal.account.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+@Getter
 public class Activity {
 
     private ActivityId id;
@@ -28,8 +30,8 @@ public class Activity {
     private final Money money;
 
     @Builder
-    public Activity(AccountId ownerAccountId, AccountId sourceAccountId, AccountId targetAccountId, LocalDateTime timestamp, Money money) {
-        this.id = null;
+    public Activity(ActivityId id, AccountId ownerAccountId, AccountId sourceAccountId, AccountId targetAccountId, LocalDateTime timestamp, Money money) {
+        this.id = id;
         this.ownerAccountId = ownerAccountId;
         this.sourceAccountId = sourceAccountId;
         this.targetAccountId = targetAccountId;
